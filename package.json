@@ -1,0 +1,30 @@
+{
+  "name": "admin",
+  "version": "1.0.0",
+  "description": "Backend server of user and admin management",
+  "main": "server.js",
+  "scripts": {
+    "test": "debug",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kdan-96/rda_admin_server.git"
+  },
+  "author": "Kalana Wijethunga",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kdan-96/rda_admin_server/issues"
+  },
+  "homepage": "https://github.com/kdan-96/rda_admin_server#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.4.0",
+    "mongodb": "^3.1.13",
+    "mongoose": "^5.4.13"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  }
+}
