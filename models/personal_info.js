@@ -23,7 +23,6 @@ const personalInfo = new Schema({
     required: true
   },
   category : {
-
     type : Array,
     items : {
         type : String,
