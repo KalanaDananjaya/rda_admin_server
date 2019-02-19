@@ -15,7 +15,7 @@ exports.listPersonalInfo = (req,res) => {
 };
 
 exports.listUserInfo = (req,res) => {
-    personalInfo.find({uid:req.params.uid},(err,info)=>{
+    personalInfo.find({uid:req.body.uid},(err,info)=>{
         if (err) {
             res.status(500).send(err);
           }
@@ -77,7 +77,7 @@ exports.createUser = (req,res) => {
             return err;
         }
         else{
-            res.status(200).json("user added successfully");
+            res.status(200).json("user request created successfully");
         }
     });
 
@@ -101,7 +101,7 @@ exports.createUser = (req,res) => {
 };
 
 exports.approveUser = (req,res)=> {
-    personalInfo.findOneAndUpdate({uid:req.params.uid},{approvalStatus : "approved"},{new : true},(err,info)=>{
+    personalInfo.findOneAndUpdate({uid:req.body.uid},{approvalStatus : "approved"},{new : true},(err,info)=>{
         if (err) {
             res.status(500).send(err);
           }
@@ -110,7 +110,7 @@ exports.approveUser = (req,res)=> {
         }
     });
 
-    loginInfo.findOneAndUpdate({uid:req.params.uid},{approvalStatus : "approved"},{new : true},(err,info)=>{
+    loginInfo.findOneAndUpdate({uid:req.body.uid},{approvalStatus : "approved"},{new : true},(err,info)=>{
         if (err) {
             res.status(500).send(err);
           }
@@ -121,7 +121,7 @@ exports.approveUser = (req,res)=> {
 };
 
 exports.rejectUser = (req,res)=> {
-    personalInfo.findOneAndUpdate({uid:req.params.uid},{approvalStatus : "rejected"},{new : true},(err,info)=>{
+    personalInfo.findOneAndUpdate({uid:req.body.uid},{approvalStatus : "rejected"},{new : true},(err,info)=>{
         if (err) {
             res.status(500).send(err);
           }
@@ -130,7 +130,7 @@ exports.rejectUser = (req,res)=> {
         }
     });
 
-    loginInfo.findOneAndUpdate({uid:req.params.uid},{approvalStatus : "rejected"},{new : true},(err,info)=>{
+    loginInfo.findOneAndUpdate({uid:req.body.uid},{approvalStatus : "rejected"},{new : true},(err,info)=>{
         if (err) {
             res.status(500).send(err);
           }
@@ -141,14 +141,14 @@ exports.rejectUser = (req,res)=> {
 };
 
 exports.deleteUser = (req, res) => {
-    personalInfo.remove({ uid: req.params.uid }, (err, info) => {
+    personalInfo.remove({ uid: req.body.uid }, (err, info) => {
       if (err) {
         res.status(404).send(err);
       }
       res.status(200).json({ message: "User succesfully deleted" });
     });
 
-    loginInfo.remove({ uid: req.params.uid }, (err, info) => {
+    loginInfo.remove({ uid: req.body.uid }, (err, info) => {
         if (err) {
           res.status(404).send(err);
         }
