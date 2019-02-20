@@ -10,7 +10,8 @@ List all the users approved by the admin
 
 **Permissions required** : None
 
-**Parameters** : None
+**Parameters** : 	projectName, division,landUser,lotNo
+
 
 ## Success Response
 
@@ -21,11 +22,9 @@ List all the users approved by the admin
 
 ```json
 {
+    {
     "success": true,
-    "msg": [
-        "cs2000",
-        "cs2001",
-        "cs2002"
-    ]
+    "msg": "created database entry"
+    }
 }
 ```

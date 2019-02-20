@@ -26,6 +26,10 @@ These endpoints are related to manipulation of user data
 * [list rejected user](documentation/user/getRejectedUsers.md) : `GET /rejectedUsers`
 * [list pending user](documentation/user/getPendingUsers.md) : `GET /pendingUsers`
 
+### Project
+These endpoints are related to manipulation of project data
+
+* [create project](documentation/project/createProject.md) : `POST /projects/createProject`
 
 ## Endpoints that require authentication
 These endpoints require passing of authentication token. 
