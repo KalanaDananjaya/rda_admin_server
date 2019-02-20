@@ -4,7 +4,9 @@ https://www.zeolearn.com/magazine/designing-a-rest-api-with-nodejs-and-mongodb-a
 
 const express = require("express");
 const bodyParser = require("body-parser");
-const routeController = require("./controllers/routeController.js")
+const routeController = require("./controllers/routeController.js");
+
+const projects = require('./routes/project.js');
 
 // db instance connection
 require("./config/db_connection");
@@ -13,11 +15,14 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+app.use('/projects',projects);
+
 const port = process.env.PORT || 3301;
 
 app.get("/",function (req,res){
   res.send('hello world');
 });
+
 
 app.route("/getAllUsers").get(routeController.listPersonalInfo);
 app.route("/getUser").post(routeController.listUserInfo);
