@@ -1,10 +1,11 @@
 const loginInfo=require("../models/login_info");
 const personalInfo = require("../models/personal_info");
 const bcrypt = require('bcrypt');
+const uuidv1 = require('uuid/v1');
 
 //const superAdmin = require("../models/super_admin");
 
-const uuidv1 = require('uuid/v1');
+
 
 exports.listPersonalInfo = (req,res) => {
     personalInfo.find({},(err,info)=>{
@@ -104,6 +105,8 @@ exports.listRejectedUsers = (req,res) => {
 //If admin,send user_type as admin. If user,send user_type as user
 exports.createUser = (req,res) => {
     var generatedUid=uuidv1();
+
+    //*************NEED TO CHECK UNIQUENESS OF EMAIL using mongoose-unique-validator */
 
     //save to personal info document
     let user = new personalInfo({

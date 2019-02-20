@@ -5,6 +5,7 @@ https://www.zeolearn.com/magazine/designing-a-rest-api-with-nodejs-and-mongodb-a
 const express = require("express");
 const bodyParser = require("body-parser");
 const routeController = require("./controllers/routeController.js")
+const loginController = require("./controllers/loginController.js")
 
 // db instance connection
 require("./config/db_connection");
@@ -32,6 +33,7 @@ app.route("/approveUser").post(routeController.approveUser);
 app.route("/rejectUser").post(routeController.rejectUser);
 app.route("/deleteUser").post(routeController.deleteUser);
 
+app.route("/login").post(loginController.loginUser);
 
 
 
