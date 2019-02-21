@@ -10,7 +10,8 @@ List all the users approved by the admin
 
 **Permissions required** : None
 
-**Parameters** : None
+**Parameters** : 	None
+
 
 ## Success Response
 

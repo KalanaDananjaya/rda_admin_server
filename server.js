@@ -7,12 +7,18 @@ const bodyParser = require("body-parser");
 const routeController = require("./controllers/routeController.js")
 const loginController = require("./controllers/loginController.js")
 const passwordController = require("./controllers/passwordController.js")
+const routeController = require("./controllers/routeController.js");
+
+const projects = require('./routes/project.js');
+
 // db instance connection
 require("./config/db_connection");
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+app.use('/projects',projects);
 
 const port = process.env.PORT || 3301;
 
