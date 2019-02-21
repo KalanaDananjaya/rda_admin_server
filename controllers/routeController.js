@@ -46,7 +46,7 @@ exports.listUserInfo = (req,res) => {
 };
 
 exports.listPendingUsers = (req,res) => {
-    personalInfo.find({status : "pending"},(err,info)=>{
+    personalInfo.find({approvalStatus : "pending"},(err,info)=>{
         if (err) {
             let msg = {
                 success : false,
@@ -65,7 +65,7 @@ exports.listPendingUsers = (req,res) => {
 };
 
 exports.listApprovedUsers = (req,res) => {
-    personalInfo.find({status : "approved"},(err,info)=>{
+    personalInfo.find({approvalStatus : "approved"},(err,info)=>{
         if (err) {
             let msg = {
                 success : false,
@@ -84,7 +84,7 @@ exports.listApprovedUsers = (req,res) => {
 };
 
 exports.listRejectedUsers = (req,res) => {
-    personalInfo.find({status : "rejected"},(err,info)=>{
+    personalInfo.find({approvalStatus : "rejected"},(err,info)=>{
         if (err) {
             let msg = {
                 success : false,
@@ -106,15 +106,12 @@ exports.listRejectedUsers = (req,res) => {
 exports.createUser = (req,res) => {
     var generatedUid=uuidv1();
 
-    //*************NEED TO CHECK UNIQUENESS OF EMAIL using mongoose-unique-validator */
-
     //save to personal info document
     let user = new personalInfo({
         email : req.body.email,
-        uid : generatedUid,//generate
+        uid : generatedUid,
         telephone : req.body.telephone,
-        fname : req.body.fname,
-        lname : req.body.lname,
+        name : req.body.name,
         category : req.body.category,
         approvalStatus : "pending",
         user_type : req.body.user_type

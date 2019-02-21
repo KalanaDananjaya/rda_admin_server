@@ -3,15 +3,16 @@ const bcrypt = require('bcrypt');
 
 
 
- exports.loginUser = (req,res) =>{
+ exports.changePassword = (req,res) =>{
     
     let oldPassword = req.body.oldPassword;
     let newPassword = req.body.newPassword;
     const saltRounds = 10;
-    
+
     bcrypt.hash(newPassword, saltRounds).then(function(hash) {
         /*NEED TO CREATE NEW PASSWORD HERE AND ASSIGN IT AS NEW HASH */ 
         // new_hash=hash
+        /*NEED TO GET THE VALUE OF HASH OUTSIDE THE FUNCTION */ 
         });
     loginInfo.findOne({ email : req.body.email},(err,user)=>{
         if (err){
