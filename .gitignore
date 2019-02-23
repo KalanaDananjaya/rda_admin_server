@@ -6,3 +6,5 @@ build/Release
 node_modules/
 
 .npm
+
+.env

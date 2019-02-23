@@ -2,17 +2,22 @@
 https://www.zeolearn.com/magazine/designing-a-rest-api-with-nodejs-and-mongodb-atlas
 */
 
+/*NEED TO REMOVE  dotenv as dev dependency and passport * as dependencies */
 const express = require("express");
 const bodyParser = require("body-parser");
-const routeController = require("./controllers/routeController.js")
-const loginController = require("./controllers/loginController.js")
-const passwordController = require("./controllers/passwordController.js")
-const routeController = require("./controllers/routeController.js");
-
-const projects = require('./routes/project.js');
+const dotenv = require ('dotenv').config();
 
 // db instance connection
 require("./config/db_connection");
+
+const routeController = require("./controllers/routeController.js")
+const loginController = require("./controllers/loginController.js")
+const passwordController = require("./controllers/passwordController.js")
+
+
+const projects = require('./routes/project.js');
+
+
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));

@@ -1,14 +1,14 @@
 const mongoose = require("mongoose");
+const dotenv = require ('dotenv').config();
+const {dbConnString} = require ("../env_config.js");
 
-const dbURI =
-  "mongodb+srv://kalana:rda_project@cluster0-eghw9.mongodb.net/test?retryWrites=true";
 const options = {
   reconnectTries: Number.MAX_VALUE,
   poolSize: 10,
   useNewUrlParser : true
 };
 
-mongoose.connect(dbURI, options).then(
+mongoose.connect(dbConnString, options).then(
   () => {
     console.log("Database connection established!");
   },
