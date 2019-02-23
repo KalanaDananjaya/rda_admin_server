@@ -13,6 +13,7 @@ require("./config/db_connection");
 const routeController = require("./controllers/routeController.js")
 const loginController = require("./controllers/loginController.js")
 const passwordController = require("./controllers/passwordController.js")
+const passwordResetConroller = require("./controllers/passwordResetController.js")
 
 
 const projects = require('./routes/project.js');
@@ -46,8 +47,10 @@ app.route("/deleteUser").post(routeController.deleteUser);
 
 app.route("/login").post(loginController.loginUser); //tested and verified
 app.route("/verify").post(loginController.verifyUser); //tested and verified
-app.route("/changePassword").post(passwordController.changePassword); //yet to be finished
+app.route("/changePassword").post(passwordController.changePassword); //tested and verified
 
+app.route("/auth/forgot_password").get(passwordResetConroller.render_forgot_password_template).post(passwordResetConroller.forgot_password); //tested and verified
+app.route("/auth/reset_password").get(passwordResetConroller.render_reset_password_template).post(passwordResetConroller.reset_password);
 
 
 app.listen(port, () => {
