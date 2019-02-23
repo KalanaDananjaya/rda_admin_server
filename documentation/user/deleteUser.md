@@ -22,10 +22,6 @@ Delete a user account
 ```json
 {
     "success": true,
-    "msg": [
-        "cs2000",
-        "cs2001",
-        "cs2002"
-    ]
+    "msg": "success"
 }
 ```
