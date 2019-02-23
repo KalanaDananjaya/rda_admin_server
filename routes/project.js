@@ -29,4 +29,29 @@ router.post('/createProject',(req,res)=>{
     }
 });
 
+router.post('/sendToNextStage', (req,res)=> {
+    const projectId = req.body.projectId;
+    const nextStage = req.body.nextStage;
+    if (projectId == undefined){
+        return res.json({
+            success:false,
+            msg:"projectId is undefinec"
+        });
+    } else {
+        Projects.sendToNextStage(projectId, nextStage, (err, success)=>{
+            if (err){
+                return res.json({
+                    success: false,
+                    msg:err
+                })
+            } else {
+                return res.json({
+                    success: true,
+                    msg:"Project moved to next stage"
+                });
+            }
+        });
+    }
+});
+
 module.exports = router;
