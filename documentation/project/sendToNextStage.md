@@ -1,6 +1,6 @@
 # Create Project
 
-Move project to next stage
+Move project to next stage. if next stage if not given system will try to move it linearly forward
 
 **URL** : `/projects/sendToNextStage`
 

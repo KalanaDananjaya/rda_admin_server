@@ -7,7 +7,6 @@ const bodyParser = require("body-parser");
 const routeController = require("./controllers/routeController.js")
 const loginController = require("./controllers/loginController.js")
 const passwordController = require("./controllers/passwordController.js")
-const routeController = require("./controllers/routeController.js");
 
 const projects = require('./routes/project.js');
 
