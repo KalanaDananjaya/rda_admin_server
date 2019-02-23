@@ -37,7 +37,6 @@ for i in range(1,len(stages_1)):
     }
     buffer.append(d)
 stages_2 = [
-    "Issue Sec. 17",
     "Paid",
     "Take action under sec. 33"
 ]
