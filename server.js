@@ -48,9 +48,12 @@ app.route("/deleteUser").post(routeController.deleteUser); //documented
 app.route("/login").post(loginController.loginUser);//tested,documented and verified
 app.route("/verify").post(loginController.verifyUser); //tested,documented and verified
 app.route("/changePassword").post(passwordController.changePassword); //tested,documented and verified
-
+/*
 app.route("/auth/forgot_password").get(passwordResetConroller.render_forgot_password_template).post(passwordResetConroller.forgot_password); //tested and verified
 app.route("/auth/reset_password").get(passwordResetConroller.render_reset_password_template).post(passwordResetConroller.reset_password);
+*/
+app.route("/auth/forgot_password").post(passwordResetConroller.forgot_password); //tested and verified
+app.route("/auth/reset_password").post(passwordResetConroller.reset_password);
 
 
 app.listen(port, () => {
