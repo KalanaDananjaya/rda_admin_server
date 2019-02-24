@@ -36,6 +36,7 @@ These endpoints are related to manipulation of project data
 These endpoints require passing of authentication token. 
 
 * [Verify User](documentation/login/verifyUser.md) : `POST /verify`
+* [Change Password](documentation/login/changePassword.md) : `POST /changePassword`
 
 ### Module
 These endpoints are related to manipulation of module data
