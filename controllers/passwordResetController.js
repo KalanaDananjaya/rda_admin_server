@@ -26,7 +26,7 @@ var handlebarsOptions = {
 
 smtpTransport.use('compile', hbs(handlebarsOptions));
 
-
+/*
 exports.render_forgot_password_template = function(req, res) {
     return res.sendFile(path.resolve("./email_templates/forgot_password.html"));
   };
@@ -34,7 +34,7 @@ exports.render_forgot_password_template = function(req, res) {
   exports.render_reset_password_template = function(req, res) {
     return res.sendFile(path.resolve("./email_templates/reset_password.html"));
   };
-
+*/
   
 exports.forgot_password = function(req, res) {
     
@@ -69,6 +69,7 @@ exports.forgot_password = function(req, res) {
           template: 'forgot_password',
           subject: 'Password help has arrived!',
           context: {
+            /* Need to send the token to frontend */
             url: 'http://localhost:3301/auth/reset_password?token=' + token
           }
         };
