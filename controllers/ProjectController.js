@@ -60,6 +60,37 @@ exports.sendToNextStage = (projectId, nextStage, callback) => {
     }
 }
 
+exports.search = (projectName, division, landUser, lotId, state, callback) => {
+    serachObject = createSearchObject(projectName, division, landUser, lotId, state)
+    projectInfo.find(serachObject, (err, docs)=>{
+        if (err){
+            return callback(err, null);
+        } else {
+            return callback(null, docs);
+        }
+    })
+}
+
+function createSearchObject(projectName, division, landUser, lotId, state){
+    serachObject = {}
+    if (projectName !== undefined){
+        serachObject.projectName = {$regex:`${projectName}.*`,$options: 'i'}
+    }
+    if (division !== undefined){
+        serachObject.division = {$regex:`${division}.*`, $options: 'i'}
+    }
+    if (landUser !== undefined){
+        serachObject.landUser = {$regex:`${landUser}.*`, $options: 'i'}
+    }
+    if (lotId !== undefined){
+        serachObject.lotId = {$regex:`${lotId}.*`, $options: 'i'}
+    }
+    if (state !== undefined){
+        serachObject.state = {$regex:`${state}.*`, $options: 'i'}
+    }
+    return serachObject
+}
+
 function getNextStage(projectId,callback) {
     projectInfo.find({projectId:projectId},(err, docs)=>{
         if(err) {
@@ -79,7 +110,7 @@ function getNextStage(projectId,callback) {
                         return callback(null, next)
                     }
                 }
-            })
+            });
         }
-    })
+    });
 }
