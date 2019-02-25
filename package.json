@@ -25,12 +25,15 @@
     "mongodb": "^3.1.13",
     "mongoose": "^5.4.13",
     "mongoose-unique-validator": "^2.0.2",
+    "nodemailer": "^5.1.1",
+    "nodemailer-express-handlebars": "^3.0.0",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
+    "dotenv": "^6.2.0",
     "nodemon": "^1.18.10"
   }
 }
