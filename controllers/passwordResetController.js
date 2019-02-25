@@ -72,19 +72,24 @@ exports.forgot_password = function(req, res) {
             url: 'http://localhost:3301/auth/reset_password?token=' + token
           }
         };
-        console.log(" came upto the mail point");
         smtpTransport.sendMail(data, function(err) {
           if (!err) {
-            console.log("mail sent");
-            return res.json({ message: 'Kindly check your email for further instructions' });
+            let msg = {
+              success : true,
+              msg : "Kindly check your email for further instructions"
+            }
+          return res.status(200).json(msg);
           } else {
-            console.log( err);
             return done(err);
           }
         });
       }
     ], function(err) {
-      return res.status(422).json({ message: err });
+      let msg = {
+        success : false,
+        msg : err
+      }
+      return res.status(422).json(msg);
     });
   };
 
@@ -103,9 +108,11 @@ exports.forgot_password = function(req, res) {
           user.reset_password_expires = undefined;
           user.save(function(err) {
             if (err) {
-              return res.status(422).send({
-                message: err
-              });
+              let msg = {
+                success : false,
+                msg : err
+              }
+              return res.status(422).json(msg);
             } else {
               var data = {
                 to: user.email,
@@ -119,7 +126,11 @@ exports.forgot_password = function(req, res) {
   
               smtpTransport.sendMail(data, function(err) {
                 if (!err) {
-                  return res.json({ message: 'Password reset' });
+                  let msg = {
+                    success : true,
+                    msg : "password reset"
+                  }
+                  return res.status(200).json(msg);
                 } else {
                   return done(err);
                 }
@@ -127,14 +138,18 @@ exports.forgot_password = function(req, res) {
             }
           });
         } else {
-          return res.status(422).send({
-            message: 'Passwords do not match'
-          });
+          let msg = {
+            success : false,
+            msg : "Passwords do not match"
+          }
+          return res.status(422).send(msg);
         }
       } else {
-        return res.status(400).send({
-          message: 'Password reset token is invalid or has expired.'
-        });
+        let msg = {
+          success : false,
+          msg : "Password reset token is invalid or has expired."
+        }
+        return res.status(400).send(msg);
       }
     });
   };

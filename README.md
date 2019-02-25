@@ -6,12 +6,8 @@ It uses json web token scheme for authentication
 Open endpoints require no authentication
 * [Get all user info](documentation/user/getAllUsers.md) : `GET /getAllUsers`
 * [Log In](documentation/login/loginUser.md) : `POST /login`
-
-### Module
-These endpoints are related to manipulation of module data
-
-
-//* [registered Module](doc/module/registeredModules.md) : `GET /modules/registeredModule`
+* [Forgot Password](documentation/login/forgotPassword.md) : `POST /auth/forgotPassword`
+* [Reset Password](documentation/login/resetPassword.md) : `POST /auth/resetPassword`
 
 ### User
 These endpoints are related to manipulation of user data
@@ -38,10 +34,7 @@ These endpoints require passing of authentication token.
 * [Verify User](documentation/login/verifyUser.md) : `POST /verify`
 * [Change Password](documentation/login/changePassword.md) : `POST /changePassword`
 
-### Module
-These endpoints are related to manipulation of module data
 
-//
-* [create Module](doc/module/createModule.md) : `POST /modules/createModule`
+
 
 
