@@ -3,6 +3,8 @@ const nextStage = require('../models/next_stage');
 
 const uuid = require('uuid/v1');
 
+//todo: save the created by UID
+
 exports.createProject = (projectName, division, landuser, mainProjectName,lotId,callback) => {
     const projectId = uuid();
     let project = {

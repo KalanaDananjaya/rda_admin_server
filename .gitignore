@@ -4,6 +4,6 @@ npm-debug.log*
 build/Release
 
 node_modules/
-
+files/*
 .npm
 .idea/

@@ -7,8 +7,9 @@ const bodyParser = require("body-parser");
 const routeController = require("./controllers/routeController.js")
 const loginController = require("./controllers/loginController.js")
 const passwordController = require("./controllers/passwordController.js")
-
+const fileUpload = require('express-fileupload');
 const projects = require('./routes/project.js');
+const files = require('./routes/file.js');
 
 // db instance connection
 require("./config/db_connection");
@@ -17,7 +18,9 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+app.use(fileUpload());
 app.use('/projects',projects);
+app.use('/files',files);
 
 const port = process.env.PORT || 3301;
 
