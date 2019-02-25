@@ -21,7 +21,7 @@ const {secret} = require ("../env_config");
         let hash = user.password;
             bcrypt.compare(loginPassword, hash).then(function(response) {
                 if (response==true){
-                    jwt.sign({uid}, secret, { expiresIn: '5h' },(err, token) => {
+                    jwt.sign({uid:uid}, secret, { expiresIn: '5h' },(err, token) => {
                         if(err) { 
                             let msg = {
                                 success : false,

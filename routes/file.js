@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const Files = require('../controllers/fileController.js');
+const passport = require('passport');
 
-router.post('/uploadFile',(req,res) => {
+router.post('/uploadFile', passport.authenticate('jwt', { session: false }),(req,res) => {
     const projectId = req.body.projectId;
     const file = req.files.file; // name of the field for file upload is file
     const uid = req.body.uid;
@@ -28,7 +29,7 @@ router.post('/uploadFile',(req,res) => {
     }
 });
 
-router.get('/projectFiles', (req,res) => {
+router.get('/projectFiles', passport.authenticate('jwt', { session: false }), (req,res) => {
     const projectId = req.query.projectId;
     if(projectId === undefined){
         return res.json({
@@ -52,7 +53,7 @@ router.get('/projectFiles', (req,res) => {
     }
 });
 
-router.get('/fileInfo', (req,res) => {
+router.get('/fileInfo', passport.authenticate('jwt', { session: false }), (req,res) => {
     const fileId = req.query.fileId;
     if(fileId === undefined){
         return res.json({
@@ -76,7 +77,7 @@ router.get('/fileInfo', (req,res) => {
     }
 });
 
-router.get('/file',(req,res) => {
+router.get('/file',passport.authenticate('jwt', { session: false }), (req,res) => {
     const fileId = req.query.fileId;
     if (fileId === undefined){
         return res.json({

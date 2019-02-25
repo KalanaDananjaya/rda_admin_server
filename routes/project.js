@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const Projects = require('../controllers/ProjectController.js');
+const passport = require('passport');
 
-router.post('/createProject',(req,res)=>{
+router.post('/createProject',passport.authenticate('jwt', { session: false }), (req,res)=>{
     const projectName = req.body.projectName;
     const division = req.body.division;
     const landUser = req.body.landUser;
@@ -30,7 +31,7 @@ router.post('/createProject',(req,res)=>{
     }
 });
 
-router.get('/search', (req, res)=> {
+router.get('/search', passport.authenticate('jwt', { session: false }), (req, res)=> {
     const projectName = req.body.projectName;
     const division = req.body.division;
     const landUser = req.body.landUser;
@@ -51,7 +52,7 @@ router.get('/search', (req, res)=> {
     })
 })
 
-router.post('/sendToNextStage', (req,res)=> {
+router.post('/sendToNextStage', passport.authenticate('jwt', { session: false }), (req,res)=> {
     const projectId = req.body.projectId;
     const nextStage = req.body.nextStage;
     if (projectId == undefined){
