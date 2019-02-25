@@ -22,10 +22,6 @@ Use to create a new project
 ```json
 {
     "success": true,
-    "msg": [
-        "cs2000",
-        "cs2001",
-        "cs2002"
-    ]
+    "msg": "created database entry"
 }
 ```
