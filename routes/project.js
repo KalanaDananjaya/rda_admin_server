@@ -7,8 +7,9 @@ router.post('/createProject',(req,res)=>{
     const division = req.body.division;
     const landUser = req.body.landUser;
     const lotId = req.body.lotNo;
-    if (projectName != undefined && division != undefined && landUser != undefined && lotId != undefined){
-        Projects.createProject(projectName,division,landUser,lotId,(err, success)=>{
+    const mainProjectName = req.body.mainProjectName;
+    if (projectName != undefined && division != undefined && landUser != undefined && lotId != undefined && mainProjectName != undefined){
+        Projects.createProject(projectName,division,landUser, mainProjectName, lotId,(err, success)=>{
             if (err){
                 return res.json({
                     success:false,
