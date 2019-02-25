@@ -31,6 +31,8 @@ These endpoints are related to manipulation of user data
 These endpoints are related to manipulation of project data
 
 * [create project](documentation/project/createProject.md) : `POST /projects/createProject`
+* [move to next stage](documentation/project/sendToNextStage.md) : `POST /projects/sendToNextStage`
+* [search](documentation/project/search.md) : `POST /projects/search`
 
 ## Endpoints that require authentication
 These endpoints require passing of authentication token. 

@@ -10,22 +10,68 @@ router.post('/createProject',(req,res)=>{
     if (projectName != undefined && division != undefined && landUser != undefined && lotId != undefined){
         Projects.createProject(projectName,division,landUser,lotId,(err, success)=>{
             if (err){
-                res.json({
+                return res.json({
                     success:false,
                     msg:err
                 });
             } else {
-                res.json({
+                return res.json({
                     success:true,
                     msg:"created database entry"
                 })
             }
         });
     } else {
-        res.json({
+        return res.json({
             success:false,
             msg:"some parameters were empty"
         })
+    }
+});
+
+router.get('/search', (req, res)=> {
+    const projectName = req.body.projectName;
+    const division = req.body.division;
+    const landUser = req.body.landUser;
+    const lotId = req.body.lotId;
+    const state = req.body.state;
+    Projects.search(projectName, division, landUser, lotId, state, (err, success)=> {
+        if (err){
+            return res.json({
+                success:false,
+                msg:err
+            });
+        } else {
+            return res.json({
+                success:true,
+                msg:success
+            })
+        }
+    })
+})
+
+router.post('/sendToNextStage', (req,res)=> {
+    const projectId = req.body.projectId;
+    const nextStage = req.body.nextStage;
+    if (projectId == undefined){
+        return res.json({
+            success:false,
+            msg:"projectId is undefinec"
+        });
+    } else {
+        Projects.sendToNextStage(projectId, nextStage, (err, success)=>{
+            if (err){
+                return res.json({
+                    success: false,
+                    msg:err
+                })
+            } else {
+                return res.json({
+                    success: true,
+                    msg:"Project moved to next stage"
+                });
+            }
+        });
     }
 });
 
