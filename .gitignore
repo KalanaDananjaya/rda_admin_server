@@ -6,4 +6,8 @@ build/Release
 node_modules/
 files/*
 .npm
+
 .idea/
+
+
+.env
