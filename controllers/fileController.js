@@ -59,3 +59,16 @@ exports.uploadFile = (projectId, file, uid,callback) => {
         }
     })
 }
+
+exports.getProjectFiles = (projectId, callback) => {
+    ProjectFiles.findOne({projectId:projectId},(err,doc)=>{
+        if (err){
+            return callback(err, null);
+        }
+        if (doc){
+            return callback(null, doc.fileIds);
+        } else {
+            return callback(null, []);
+        }
+    })
+}
