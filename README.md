@@ -39,6 +39,7 @@ These endpoints are related to manipulation of project files
 * [upload file](documentation/files/upload.md) : `POST /files/uploadFile`
 * [get project file ids](documentation/files/getProjectFiles.md) : `GET /files/projectFiles`
 * [get file info](documentation/files/getFileInfo.md) : `GET /files/fileInfo`
+* [get file](documentation/files/getFile.md) : `GET /files/file`
 
 ## Endpoints that require authentication
 These endpoints require passing of authentication token. 

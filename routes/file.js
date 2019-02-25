@@ -76,6 +76,26 @@ router.get('/fileInfo', (req,res) => {
     }
 });
 
-//todo: given fileID get the file
+router.get('/file',(req,res) => {
+    const fileId = req.query.fileId;
+    if (fileId === undefined){
+        return res.json({
+            success: false,
+            msg: 'file id is undefined'
+        });
+    } else {
+        Files.getFile(fileId, (err, success) => {
+            if(err){
+                return res.json({
+                    success: false,
+                    msg: err
+                });
+            } else {
+                console.log(success)
+                return res.sendFile(success);
+            }
+        });
+    }
+});
 
 module.exports = router;

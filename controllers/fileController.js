@@ -1,7 +1,8 @@
 const FileInfo = require('../models/file_info');
 const ProjectFiles = require('../models/project_file');
-const projectInfo = require('../models/project_info')
+const projectInfo = require('../models/project_info');
 
+const fs = require('fs');
 const uuid = require('uuid/v1');
 
 exports.uploadFile = (projectId, file, uid,callback) => {
@@ -86,3 +87,10 @@ exports.getFileInfo = (fileId, callback) => {
     });
 }
 
+exports.getFile = (fileId, callback) => {
+    if(fs.existsSync(`./files/${fileId}.pdf`)){
+        callback(null, `${process.cwd()}/files/${fileId}.pdf`)
+    } else {
+        callback("No such file", null);
+    }
+}
