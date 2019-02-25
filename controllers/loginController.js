@@ -4,6 +4,15 @@ const jwt = require('jsonwebtoken');
 
 const secret = "Asdad73@fds";
 
+exports.getUserByUID = (uid, callback) => {
+    loginInfo.findOne({uid:uid}, (err, user)=> {
+        if(err){
+            callback(err, null);
+        } else {
+            callback(null, user); // important any changes can affect passport check
+        }
+    })
+}
 
 
  exports.loginUser = (req,res) =>{
@@ -23,7 +32,7 @@ const secret = "Asdad73@fds";
         let hash = user.password;
             bcrypt.compare(loginPassword, hash).then(function(response) {
                 if (response==true){
-                    jwt.sign({uid}, secret, { expiresIn: '5h' },(err, token) => {
+                    jwt.sign({uid:uid}, secret, { expiresIn: '5h' },(err, token) => {
                         if(err) { 
                             let msg = {
                                 success : false,

@@ -10,6 +10,7 @@ const passwordController = require("./controllers/passwordController.js")
 const fileUpload = require('express-fileupload');
 const projects = require('./routes/project.js');
 const files = require('./routes/file.js');
+const passport = require('passport');
 
 // db instance connection
 require("./config/db_connection");
@@ -17,6 +18,10 @@ require("./config/db_connection");
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+app.use(passport.initialize());
+app.use(passport.session());
+require('./config/passport')(passport);
 
 app.use(fileUpload());
 app.use('/projects',projects);
