@@ -52,8 +52,30 @@ router.get('/projectFiles', (req,res) => {
     }
 });
 
-//todo: create link to get list of fileIds
-//todo: create link to get file info given file Id
+router.get('/fileInfo', (req,res) => {
+    const fileId = req.query.fileId;
+    if(fileId === undefined){
+        return res.json({
+            success: false,
+            msg: 'file id is undefined'
+        });
+    } else {
+        Files.getFileInfo(fileId,(err, success)=> {
+            if(err){
+                return res.json({
+                    success: false,
+                    msg:err
+                });
+            } else {
+                return res.json({
+                    success: true,
+                    msg:success
+                });
+            }
+        });
+    }
+});
+
 //todo: given fileID get the file
 
 module.exports = router;

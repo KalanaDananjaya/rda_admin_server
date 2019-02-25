@@ -72,3 +72,17 @@ exports.getProjectFiles = (projectId, callback) => {
         }
     })
 }
+
+exports.getFileInfo = (fileId, callback) => {
+    FileInfo.findOne({fileId:fileId},(err, doc) => {
+        if(err){
+            return callback(err, null);
+        }
+        if(doc){
+            return callback(null, doc);
+        } else {
+            return callback('No such file', null);
+        }
+    });
+}
+
