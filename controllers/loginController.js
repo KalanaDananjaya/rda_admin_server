@@ -2,7 +2,8 @@ const loginInfo=require("../models/login_info");
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const secret = "Asdad73@fds";
+
+const {secret} = require ("../env_config");
 
 exports.getUserByUID = (uid, callback) => {
     loginInfo.findOne({uid:uid}, (err, user)=> {
