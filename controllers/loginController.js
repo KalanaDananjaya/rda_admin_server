@@ -4,6 +4,17 @@ const jwt = require('jsonwebtoken');
 
 const {secret} = require ("../env_config");
 
+exports.getUserByUID = (uid, callback) => {
+    loginInfo.findOne({uid:uid}, (err, user)=> {
+        if(err){
+            callback(err, null);
+        } else {
+            callback(null, user); // important any changes can affect passport check
+        }
+    })
+}
+
+
  exports.loginUser = (req,res) =>{
     
     let loginPassword = req.body.password;
