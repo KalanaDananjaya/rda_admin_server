@@ -2,7 +2,7 @@
 
 Change the user password
 
-**URL** : `/changePassword`
+**URL** : `/login/changePassword`
 
 **Method** : `POST`
 

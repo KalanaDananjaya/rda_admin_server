@@ -2,7 +2,7 @@
 
 Send a user verification request
 
-**URL** : `/verify`
+**URL** : `/login/verifyUser`
 
 **Method** : `POST`
 

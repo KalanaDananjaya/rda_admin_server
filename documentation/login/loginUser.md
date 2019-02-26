@@ -2,7 +2,7 @@
 
 Send a login request
 
-**URL** : `/login`
+**URL** : `/login/`
 
 **Method** : `POST`
 

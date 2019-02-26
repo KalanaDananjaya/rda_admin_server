@@ -4,24 +4,24 @@ It uses json web token scheme for authentication
 
 ## Open endpoints
 Open endpoints require no authentication
-* [Get all user info](documentation/user/getAllUsers.md) : `GET /getAllUsers`
-* [Log In](documentation/login/loginUser.md) : `POST /login`
-* [Forgot Password](documentation/login/forgotPassword.md) : `POST /auth/forgotPassword`
-* [Reset Password](documentation/login/resetPassword.md) : `POST /auth/resetPassword`
+* [Get all user info](documentation/user/getAllUsers.md) : `GET /user/getAllUsers`
+* [Log In](documentation/login/loginUser.md) : `POST /login/`
+* [Forgot Password](documentation/login/forgotPassword.md) : `POST /reset/forgotPassword`
+* [Reset Password](documentation/login/resetPassword.md) : `POST /reset/resetPassword`
 
 ### User
 These endpoints are related to manipulation of user data
 
-* [get user](documentation/user/getUser.md) : `POST /getUser`
-* [create user](documentation/user/createUser.md) : `POST /createUser`
+* [get user](documentation/user/getUser.md) : `POST /user/getUser`
+* [create user](documentation/user/createUser.md) : `POST /user/createUser`
 
-* [approve user](documentation/user/approveUser.md) : `POST /approveUser`
-* [reject user](documentation/user/rejectUser.md) : `POST /rejectUser`
-* [delete user](documentation/user/deleteUser.md) : `POST /deleteUser`
+* [approve user](documentation/user/approveUser.md) : `POST /user/approveUser`
+* [reject user](documentation/user/rejectUser.md) : `POST /user/rejectUser`
+* [delete user](documentation/user/deleteUser.md) : `POST /user/deleteUser`
 
-* [list approved user](documentation/user/getApprovedUsers.md) : `GET /approvedUsers`
-* [list rejected user](documentation/user/getRejectedUsers.md) : `GET /rejectedUsers`
-* [list pending user](documentation/user/getPendingUsers.md) : `GET /pendingUsers`
+* [list approved user](documentation/user/getApprovedUsers.md) : `GET /user/approvedUsers`
+* [list rejected user](documentation/user/getRejectedUsers.md) : `GET /user/rejectedUsers`
+* [list pending user](documentation/user/getPendingUsers.md) : `GET /user/pendingUsers`
 
 ### Project
 These endpoints are related to manipulation of project data
@@ -40,8 +40,8 @@ These endpoints are related to manipulation of project files
 ## Endpoints that require authentication
 These endpoints require passing of authentication token. 
 
-* [Verify User](documentation/login/verifyUser.md) : `POST /verify`
-* [Change Password](documentation/login/changePassword.md) : `POST /changePassword`
+* [Verify User](documentation/login/verifyUser.md) : `POST /login/verify`
+* [Change Password](documentation/login/changePassword.md) : `POST /login/changePassword`
 
 
 

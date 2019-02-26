@@ -2,7 +2,7 @@
 
 Send a user creation request to an admin
 
-**URL** : `/createUser`
+**URL** : `/user/createUser`
 
 **Method** : `POST`
 

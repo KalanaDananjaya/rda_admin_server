@@ -2,7 +2,7 @@
 
 Delete a user account
 
-**URL** : `/deleteUser`
+**URL** : `/user/deleteUser`
 
 **Method** : `POST`
 

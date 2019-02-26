@@ -2,7 +2,7 @@
 
 Approve a request for a user account
 
-**URL** : `/approveUser`
+**URL** : `/user/approveUser`
 
 **Method** : `POST`
 

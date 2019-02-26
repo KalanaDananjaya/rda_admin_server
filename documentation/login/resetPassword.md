@@ -2,7 +2,7 @@
 
 Reset the user password
 
-**URL** : `/auth/resetPassword`
+**URL** : `/reset/resetPassword`
 
 **Method** : `POST`
 

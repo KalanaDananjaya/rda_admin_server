@@ -2,7 +2,7 @@
 
 List all the users approved by the admin
 
-**URL** : `/approvedUsers`
+**URL** : `/user/approvedUsers`
 
 **Method** : `GET`
 

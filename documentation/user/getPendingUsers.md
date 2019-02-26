@@ -2,7 +2,7 @@
 
 List all the users pending admin approval
 
-**URL** : `/pendingUsers`
+**URL** : `/user/pendingUsers`
 
 **Method** : `GET`
 
@@ -21,7 +21,7 @@ List all the users pending admin approval
 
 ```json
 {
-    {
+    
     "success": true,
     "msg": [
         {
@@ -42,6 +42,6 @@ List all the users pending admin approval
             "__v": 0
         }
     ]
-}
+
 }
 ```
