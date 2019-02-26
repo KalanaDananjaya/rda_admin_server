@@ -3,12 +3,15 @@ const nextStage = require('../models/next_stage');
 
 const uuid = require('uuid/v1');
 
-exports.createProject = (projectName, division, landuser, lotId,callback) => {
+//todo: save the created by UID
+
+exports.createProject = (projectName, division, landuser, mainProjectName,lotId,callback) => {
     const projectId = uuid();
     let project = {
         projectName:projectName,
         division:division,
         landUser:landuser,
+        mainProjectName: mainProjectName,
         lotId:lotId        
     };
     // check if project exists

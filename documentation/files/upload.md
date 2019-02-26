@@ -1,8 +1,8 @@
-# Create Project
+# Upload File
 
-Use to create a new project
+Used to upload file in to the system
 
-**URL** : `/projects/createProject`
+**URL** : `/files/uploadFile`
 
 **Method** : `POST`
 
@@ -10,7 +10,7 @@ Use to create a new project
 
 **Permissions required** : None
 
-**Parameters** : uid
+**Parameters** : projectId, file, uid
 
 ## Success Response
 
@@ -22,6 +22,6 @@ Use to create a new project
 ```json
 {
     "success": true,
-    "msg": "created database entry"
+    "msg": "File uploaded successfully"
 }
 ```
