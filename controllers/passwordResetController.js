@@ -2,6 +2,7 @@ const loginInfo=require("../models/login_info");
 const crypto = require("crypto");
 const path = require("path");
 const async = require("async");
+const bcrypt = require('bcrypt');
 var  hbs = require('nodemailer-express-handlebars'),
   email = process.env.MAILER_EMAIL_ID || 'auth_email_address@gmail.com',
   pass = process.env.MAILER_PASSWORD || 'auth_email_pass'
