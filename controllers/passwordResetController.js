@@ -60,7 +60,7 @@ exports.forgot_password = function(req, res) {
           subject: 'Password help has arrived!',
           context: {
             /* Need to send the token to frontend */
-            url: 'http://localhost:3301/auth/reset_password?token=' + token
+            url: 'http://localhost:4200/resetpassword?token=' + token
           }
         };
         smtpTransport.sendMail(data, function(err) {
