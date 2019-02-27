@@ -25,16 +25,6 @@ var handlebarsOptions = {
 };
 
 smtpTransport.use('compile', hbs(handlebarsOptions));
-
-/*
-exports.render_forgot_password_template = function(req, res) {
-    return res.sendFile(path.resolve("./email_templates/forgot_password.html"));
-  };
-
-  exports.render_reset_password_template = function(req, res) {
-    return res.sendFile(path.resolve("./email_templates/reset_password.html"));
-  };
-*/
   
 exports.forgot_password = function(req, res) {
     
@@ -94,63 +84,80 @@ exports.forgot_password = function(req, res) {
     });
   };
 
-
-  exports.reset_password = function(req, res, next) {
-    loginInfo.findOne({
-      reset_password_token: req.body.token,
-      reset_password_expires: {
-        $gt: Date.now()
+  exports.validateRstPwToken = (req,res) =>{
+    loginInfo.findOne({reset_password_token: req.body.token,reset_password_expires: {$gt: Date.now()}},(err,token)=>{
+      if(err){
+        let msg = {
+          success : false,
+          msg : err
+        }
+        res.status(500).json(msg);
       }
-    }).exec(function(err, user) {
-      if (!err && user) {
-        if (req.body.newPassword === req.body.verifyPassword) {
-          user.hash_password = bcrypt.hashSync(req.body.newPassword, 10);
-          user.reset_password_token = undefined;
-          user.reset_password_expires = undefined;
-          user.save(function(err) {
-            if (err) {
-              let msg = {
-                success : false,
-                msg : err
-              }
-              return res.status(422).json(msg);
-            } else {
-              var data = {
-                to: user.email,
-                from: email,
-                template: 'reset_password',
-                subject: 'Password Reset Confirmation',
-                context: {
-                  
+      else{
+        let msg = {
+          success : true,
+          msg : req.body.token
+      }
+          res.status(200).json(msg);
+      }
+    });
+  }
+    exports.reset_password = function(req, res) {
+      loginInfo.findOne({
+        reset_password_token: req.body.token,
+        reset_password_expires: {
+          $gt: Date.now()
+        }
+      }).exec(function(err, user) {
+        if (!err && user) {
+          if (req.body.newPassword === req.body.verifyPassword) {
+            user.hash_password = bcrypt.hashSync(req.body.newPassword, 10);
+            user.reset_password_token = undefined;
+            user.reset_password_expires = undefined;
+            user.save(function(err) {
+              if (err) {
+                let msg = {
+                  success : false,
+                  msg : err
                 }
-              };
-  
-              smtpTransport.sendMail(data, function(err) {
-                if (!err) {
-                  let msg = {
-                    success : true,
-                    msg : "password reset"
+                return res.status(422).json(msg);
+              } else {
+                var data = {
+                  to: user.email,
+                  from: email,
+                  template: 'reset_password',
+                  subject: 'Password Reset Confirmation',
+                  context: {
+                    
                   }
-                  return res.status(200).json(msg);
-                } else {
-                  return done(err);
-                }
-              });
+                };
+    
+                smtpTransport.sendMail(data, function(err) {
+                  if (!err) {
+                    let msg = {
+                      success : true,
+                      msg : "password reset"
+                    }
+                    return res.status(200).json(msg);
+                  } else {
+                    return done(err);
+                  }
+                });
+              }
+            });
+          } else {
+            let msg = {
+              success : false,
+              msg : "Passwords do not match"
             }
-          });
+            return res.status(422).send(msg);
+          }
         } else {
           let msg = {
             success : false,
-            msg : "Passwords do not match"
+            msg : "Password reset token is invalid or has expired."
           }
-          return res.status(422).send(msg);
+          return res.status(400).send(msg);
         }
-      } else {
-        let msg = {
-          success : false,
-          msg : "Password reset token is invalid or has expired."
-        }
-        return res.status(400).send(msg);
-      }
-    });
-  };
+      });
+    };

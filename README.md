@@ -7,6 +7,7 @@ Open endpoints require no authentication
 * [Get all user info](documentation/user/getAllUsers.md) : `GET /user/getAllUsers`
 * [Log In](documentation/login/loginUser.md) : `POST /login/`
 * [Forgot Password](documentation/login/forgotPassword.md) : `POST /reset/forgotPassword`
+* [Validate Reset Password Token] (documentation/login/validateResetPw.md) : `POST /reset/resetPasswordValidate`
 * [Reset Password](documentation/login/resetPassword.md) : `POST /reset/resetPassword`
 
 ### User

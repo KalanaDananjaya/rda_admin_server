@@ -7,6 +7,10 @@ router.post('/forgotPassword',(req,res)=>{
     return resetPw.forgot_password(req,res);
 });
 
+router.post('/resetPasswordValidate',(req,res)=>{
+    return resetPw.validateRstPwToken(req,res);
+})
+
 router.post('/resetPassword',(req,res)=>{
     return resetPw.reset_password(req,res);
 });
