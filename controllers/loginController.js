@@ -46,7 +46,7 @@ exports.getUserByUID = (uid, callback) => {
 
                                 let msg = {
                                     success : true,
-                                    msg : [uid,token]
+                                    msg : [uid,token,user]
                                 }
                                 res.status(200).json(msg);
                             }

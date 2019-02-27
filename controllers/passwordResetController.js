@@ -112,7 +112,7 @@ exports.forgot_password = function(req, res) {
       }).exec(function(err, user) {
         if (!err && user) {
           if (req.body.newPassword === req.body.verifyPassword) {
-            user.hash_password = bcrypt.hash(req.body.newPassword, 10);
+            user.password = bcrypt.hash(req.body.newPassword, 10);
             user.reset_password_token = undefined;
             user.reset_password_expires = undefined;
             user.save(function(err) {
