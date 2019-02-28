@@ -103,7 +103,56 @@ exports.forgot_password = function(req, res) {
       }
     });
   }
-    exports.reset_password = function(req, res) {
+    exports.reset_password = (req, res)=> {
+      if (req.body.newPassword === req.body.verifyPassword) {
+        var newPwHash =bcrypt.hash(req.body.newPassword, 10);
+        loginInfo.findOneAndUpdate({reset_password_token:req.body.token,reset_password_expires:{ $gt: Date.now()}},{password : newPwHash,reset_password_token: null, reset_password_expires : null},{new : true},(err,info)=>{
+          if (err) {
+              let msg = {
+                  success : false,
+                  msg : err
+              }
+              res.status(422).json(msg);
+            }
+          else{/*
+              let msg = {
+                  success : true,
+                  msg : "success"
+              }
+              res.status(200).json(msg);
+              */
+             var data = {
+              to: user.email,
+              from: email,
+              template: 'reset_password',
+              subject: 'Password Reset Confirmation',
+              context: {
+                
+              }
+            };
+
+            smtpTransport.sendMail(data, function(err) {
+              if (!err) {
+                let msg = {
+                  success : true,
+                  msg : "password reset"
+                }
+                return res.status(200).json(msg);
+              } else {
+                return done(err);
+              }
+            });
+          }
+        });
+      }
+      else{
+        let msg = {
+          success : false,
+          msg : "Passwords do not match"
+        }
+        return res.status(422).send(msg);
+      }
+      /*
       loginInfo.findOne({
         reset_password_token: req.body.token,
         reset_password_expires: {
@@ -112,7 +161,7 @@ exports.forgot_password = function(req, res) {
       }).exec(function(err, user) {
         if (!err && user) {
           if (req.body.newPassword === req.body.verifyPassword) {
-            user.password = bcrypt.hash(req.body.newPassword, 10);
+            user.hash_password = bcrypt.hash(req.body.newPassword, 10);
             user.reset_password_token = undefined;
             user.reset_password_expires = undefined;
             user.save(function(err) {
@@ -161,4 +210,4 @@ exports.forgot_password = function(req, res) {
           return res.status(400).send(msg);
         }
       });
-    };
+    */};
