@@ -3,7 +3,7 @@
 
 List all the users rejected by the admin
 
-**URL** : `/rejectedUsers`
+**URL** : `/user/rejectedUsers`
 
 **Method** : `GET`
 

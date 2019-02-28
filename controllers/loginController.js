@@ -16,7 +16,6 @@ exports.getUserByUID = (uid, callback) => {
 
 
  exports.loginUser = (req,res) =>{
-    
     let loginPassword = req.body.password;
 
     loginInfo.findOne({ email : req.body.email},(err,user)=>{
@@ -26,42 +25,56 @@ exports.getUserByUID = (uid, callback) => {
                 msg : err
             }
             res.status(500).json(msg);
+
         }
+        
         else{
-        let uid = user.uid;
-        let hash = user.password;
-            bcrypt.compare(loginPassword, hash).then(function(response) {
-                if (response==true){
-                    jwt.sign({uid:uid}, secret, { expiresIn: '5h' },(err, token) => {
-                        if(err) { 
-                            let msg = {
-                                success : false,
-                                msg : err
-                            }
-                            res.status(401).json(msg);
-                        }    
-                        else{
+            if(user){
+                let uid = user.uid;
+                let hash = user.password;
+                bcrypt.compare(loginPassword, hash).then(function(response) {
+                    if (response==true){
+                        jwt.sign({uid:uid}, secret, { expiresIn: '5h' },(err, token) => {
+                            if(err) { 
+                                let msg = {
+                                    success : false,
+                                    msg : err
+                                }
+                                res.status(401).json(msg);
+                            }    
+                            else{
 
-                            let msg = {
-                                success : true,
-                                msg : [uid,token]
+                                let msg = {
+                                    success : true,
+                                    msg : [uid,token,user]
+                                }
+                                res.status(200).json(msg);
                             }
-                            res.status(200).json(msg);
-                        }
                         
-                    });
+                        });
                     
-                }
-
-                else{
-                    let msg = {
-                        success : false,
-                        msg : "invalid email/password"
                     }
-                    res.status(401).json(msg);
+
+                    else{
+                        let msg = {
+                            success : false,
+                            msg : "invalid email/password"
+                        }
+                        res.status(401).json(msg);
+                    }
+                });
+            }
+            else{
+                let msg = {
+                    success : false,
+                    msg : "User not found"
                 }
-             });
+                res.status(401).json(msg);
+            }
+
         }
+        
+        
     });
  }
 

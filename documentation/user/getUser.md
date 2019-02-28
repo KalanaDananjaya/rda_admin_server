@@ -2,7 +2,7 @@
 
 Get all personal info of the user
 
-**URL** : `/getUser`
+**URL** : `/user/getUser`
 
 **Method** : `POST`
 

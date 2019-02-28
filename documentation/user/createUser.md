@@ -2,7 +2,7 @@
 
 Send a user creation request to an admin
 
-**URL** : `/createUser`
+**URL** : `/user/createUser`
 
 **Method** : `POST`
 
@@ -10,7 +10,7 @@ Send a user creation request to an admin
 
 **Permissions required** : None
 
-**Parameters** : email,telephone,fname,lname,category,user_type["admin","user"]
+**Parameters** : email,telephone,password,name,category,user_type["admin","user"]
 
 ## Success Response
 

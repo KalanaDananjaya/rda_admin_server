@@ -2,7 +2,7 @@
 
 Get list of all users registered in the system
 
-**URL** : `/getAllUsers`
+**URL** : `/user/getAllUsers`
 
 **Method** : `GET`
 

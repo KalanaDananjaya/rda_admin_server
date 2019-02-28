@@ -9,17 +9,21 @@ const dotenv = require ('dotenv').config();
 
 // db instance connection
 require("./config/db_connection");
-
-const routeController = require("./controllers/routeController.js")
+/*
+const routeController = require("./controllers/userController.js")
 const loginController = require("./controllers/loginController.js")
 const passwordController = require("./controllers/passwordController.js")
+const passwordResetConroller = require("./controllers/passwordResetController.js")
+*/
 const fileUpload = require('express-fileupload');
 
-const passwordResetConroller = require("./controllers/passwordResetController.js")
 
 const cors = require('cors')
 const projects = require('./routes/project.js');
 const files = require('./routes/file.js');
+const user = require('./routes/user.js');
+const LogIn = require ('./routes/login.js');
+const resetPw = require ('./routes/pwReset.js')
 const passport = require('passport');
 
 
@@ -34,15 +38,25 @@ app.use(passport.session());
 require('./config/passport')(passport);
 
 app.use(fileUpload());
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH');
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, uid, authorization");
+  next();
+});
 app.use('/projects',projects);
 app.use('/files',files);
+app.use('/user',user);
+app.use('/login',LogIn);
+app.use('/reset',resetPw);
+
 
 const port = process.env.PORT || 3301;
 
 app.get("/",function (req,res){
   res.send('hello world');
 });
-
+/*
 app.route("/getAllUsers").get(routeController.listPersonalInfo);  //tested,documented and verified
 app.route("/getUser").post(routeController.listUserInfo);         //tested,documented and verified
 
@@ -59,14 +73,14 @@ app.route("/deleteUser").post(routeController.deleteUser); //documented
 app.route("/login").post(loginController.loginUser);//tested,documented and verified
 app.route("/verify").post(loginController.verifyUser); //tested,documented and verified
 app.route("/changePassword").post(passwordController.changePassword); //tested,documented and verified
-/*
+
 app.route("/auth/forgot_password").get(passwordResetConroller.render_forgot_password_template).post(passwordResetConroller.forgot_password); //tested and verified
 app.route("/auth/reset_password").get(passwordResetConroller.render_reset_password_template).post(passwordResetConroller.reset_password);
-*/
+
 app.route("/auth/forgot_password").post(passwordResetConroller.forgot_password); //tested and verified
 app.route("/auth/reset_password").post(passwordResetConroller.reset_password);
 
-
+*/
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });

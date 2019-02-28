@@ -1,7 +1,7 @@
 # Forgot Password
 
 
-**URL** : `/auth/forgotPassword`
+**URL** : `/reset/forgotPassword`
 
 **Method** : `POST`
 

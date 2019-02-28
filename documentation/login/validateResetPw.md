@@ -1,8 +1,8 @@
-# Change Password
+# Validate Reset Password Token
 
-Reset the user password
+validate reset password token
 
-**URL** : `/reset/resetPassword`
+**URL** : `/reset/resetPasswordValidate`
 
 **Method** : `POST`
 
@@ -10,7 +10,7 @@ Reset the user password
 
 **Permissions required** : None
 
-**Parameters** : token,newPassword,verifyPassword
+**Parameters** : token
 
 ## Success Response
 
@@ -22,6 +22,6 @@ Reset the user password
 ```json
 {
     "success": true,
-    "msg": "Password reset"
+    "msg": "token"
 }
 ```

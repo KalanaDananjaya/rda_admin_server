@@ -2,7 +2,7 @@
 
 Reject a request for a user account
 
-**URL** : `/rejectUser`
+**URL** : `/user/rejectUser`
 
 **Method** : `POST`
 
