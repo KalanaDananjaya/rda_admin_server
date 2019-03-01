@@ -38,7 +38,8 @@ router.post('/rejectUser',passport.authenticate('jwt', { session: false }),(req,
 });
 
 router.post('/deleteUser',passport.authenticate('jwt', { session: false }),(req,res)=>{
-    return Users.approveUser(req,res);
+    console.log("test");
+    return Users.deleteUser(req,res);
 });
 
 module.exports = router;

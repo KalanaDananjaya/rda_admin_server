@@ -8,6 +8,7 @@ const bcrypt = require('bcrypt');
     const saltRounds = 10;
 
     bcrypt.hash(newPassword, saltRounds).then(function(new_hash) {
+        console.log("new hash",new_hash);
         /*create new_hash for newPassword*/
         loginInfo.findOne({ email : req.body.email},(err,user)=>{
             if (err){
@@ -18,7 +19,9 @@ const bcrypt = require('bcrypt');
                 res.status(500).json(msg);
             }
             else{
+                console.log(user);
                 let hash = user.password; //get old password's hash from db and check whether its correct using bcrypt
+                console.log("old hash",hash)
                 bcrypt.compare(oldPassword, hash).then(function(response) {
                     if (response==true){
                         /*Changing the password here */
@@ -38,13 +41,6 @@ const bcrypt = require('bcrypt');
                                 res.status(200).json(msg);
                             }
                         });
-    
-                        /* Finish changing the password */
-                        let msg = {
-                            success : true,
-                            msg : "success"
-                        }
-                        res.status(200).json(msg);
                     }
     
                     else{

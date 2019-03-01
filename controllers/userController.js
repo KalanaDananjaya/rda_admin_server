@@ -46,14 +46,14 @@ exports.listUserInfo = (req,res) => {
 };
 
 exports.listPendingUsers = (req,res) => {
-    console.log("pending called");
+    
     personalInfo.find({approvalStatus : "pending"},(err,info)=>{
         if (err) {
             let msg = {
                 success : false,
                 msg : err
             }
-            console.log(msg)
+            
             res.status(500).json(msg);
           }
         else{
@@ -61,7 +61,7 @@ exports.listPendingUsers = (req,res) => {
                 success : true,
                 msg : info
             }
-            console.log(msg)
+     
             res.status(200).json(msg);
         }
     });
@@ -236,6 +236,7 @@ exports.rejectUser = (req,res)=> {
 };
 
 exports.deleteUser = (req, res) => {
+    console.log("del req recieved");
     personalInfo.remove({ uid: req.body.uid }, (err, info) => {
       if (err) {
         let msg = {
@@ -245,6 +246,7 @@ exports.deleteUser = (req, res) => {
         res.status(404).json(msg);
       }
       else{
+        console.log("removed from personal info");
         loginInfo.remove({ uid: req.body.uid }, (err, info) => {
             if (err) {
                 let msg = {
@@ -258,6 +260,7 @@ exports.deleteUser = (req, res) => {
                     success : true,
                     msg : "success"
                 }
+                console.log("removed from login info");
                 res.status(200).json(msg);
             }
           });
