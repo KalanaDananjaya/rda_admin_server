@@ -171,7 +171,7 @@ exports.createUser = (req,res) => {
 
 exports.approveUser = (req,res)=> {
     personalInfo.findOneAndUpdate({uid:req.body.uid},{approvalStatus : "approved"},{new : true},(err,info)=>{
-        console.log("backend approve request for personal info recieved");
+        
         if (err) {
             let msg = {
                 success : false,
@@ -181,7 +181,7 @@ exports.approveUser = (req,res)=> {
           }
         else{
             loginInfo.findOneAndUpdate({uid:req.body.uid},{approvalStatus : "approved"},{new : true},(err,info)=>{
-                console.log("backend approve request recieved");
+                
                 if (err) {
                     let msg = {
                         success : false,
