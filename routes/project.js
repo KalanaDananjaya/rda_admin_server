@@ -49,11 +49,11 @@ router.get('/stateById', passport.authenticate('jwt', { session: false }), (req,
 });
 
 router.get('/search', passport.authenticate('jwt', { session: false }), (req, res)=> {
-    const projectName = req.body.projectName;
-    const division = req.body.division;
-    const landUser = req.body.landUser;
-    const lotId = req.body.lotId;
-    const state = req.body.state;
+    const projectName = req.query.projectName;
+    const division = req.query.division;
+    const landUser = req.query.landUser;
+    const lotId = req.query.lotId;
+    const state = req.query.state;
     Projects.search(projectName, division, landUser, lotId, state, (err, success)=> {
         if (err){
             return res.json({
