@@ -3,6 +3,21 @@ const nextStage = require('../models/next_stage');
 
 const uuid = require('uuid/v1');
 
+exports.getProjectStateById = (projectId, callback) => {
+    projectInfo.find({projectId:projectId}, (err, docs) => {
+        if (err) {
+            return callback(err, null);
+        } else {
+            const doc = docs[0];
+            if (doc){
+                return callback(null, doc.state);
+            } else {
+                return callback('invalid projectId',null);
+            }
+        }
+    })
+}
+
 //todo: save the created by UID
 
 exports.createProject = (projectName, division, landuser, mainProjectName,lotId,callback) => {
