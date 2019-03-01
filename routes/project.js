@@ -48,6 +48,7 @@ router.post('/createProject',passport.authenticate('jwt', { session: false }), (
             }
         });
     } else {
+        console.log(req.body)
         return res.json({
             success:false,
             msg:"some parameters were empty"
