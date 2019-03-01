@@ -1,4 +1,5 @@
 const projectInfo = require('../models/project_info');
+const mainProjects = require('../models/main_project_info');
 const nextStage = require('../models/next_stage');
 
 const uuid = require('uuid/v1');
@@ -18,6 +19,31 @@ exports.getProjectStateById = (projectId, callback) => {
     })
 }
 
+exports.createMainProject = (projectName, callback) => {
+    const projectId = uuid();
+    mainProjects.findOne({projectName:projectName}, (err, doc)=>{
+        if (err){
+            return callback(err, null);
+        }
+        if(doc){
+            return callback('Project by name already exists', null);
+        } else {
+            project = {
+                projectName: projectName,
+                projectId: projectId
+            };
+            const project_doc = new mainProjects(project);
+            project_doc.save(err =>{
+                if(err){
+                    return callback(err, null);
+                } else {
+                    return callback(null, 'main project created');
+                }
+            })
+        }
+    })
+}
+
 //todo: save the created by UID
 
 exports.createProject = (projectName, division, landuser, mainProjectName,lotId,callback) => {
@@ -29,26 +55,38 @@ exports.createProject = (projectName, division, landuser, mainProjectName,lotId,
         mainProjectName: mainProjectName,
         lotId:lotId        
     };
-    // check if project exists
-    projectInfo.find(project, (err, docs)=> {
-        if (docs.length){
-            // project with these meta data already exists
-            callback('duplicate entry',null)
+    // check if main Project exists
+    mainProjects.findOne({projectName:mainProjectName}, (err,doc)=>{
+        if (err){
+            return callback(err, null);
         } else {
-            project.projectId = projectId;
-            project.state = "Declaration of Sec. 5";
-            const project_doc = new projectInfo(project)
-            project_doc.save(err => {
-                if (err){
-                    return callback(err,null)
-                } else {
-                    return callback(null, {
-                        success:true
-                    });
-                }
-            });
+            if (doc){
+                // check if project exists
+                projectInfo.find(project, (err, docs)=> {
+                    if (docs.length){
+                        // project with these meta data already exists
+                        callback('duplicate entry',null)
+                    } else {
+                        project.projectId = projectId;
+                        project.state = "Declaration of Sec. 5";
+                        const project_doc = new projectInfo(project)
+                        project_doc.save(err => {
+                            if (err){
+                                return callback(err,null)
+                            } else {
+                                return callback(null, {
+                                    success:true
+                                });
+                            }
+                        });
+                    }
+                });    
+            } else {
+                return callback('main project does not exists', null);
+            }
         }
-    });    
+    })
+    
 }
 
 exports.sendToNextStage = (projectId, nextStage, callback) => {
