@@ -31,12 +31,29 @@ router.post('/createProject',passport.authenticate('jwt', { session: false }), (
     }
 });
 
+router.get('/stateById', passport.authenticate('jwt', { session: false }), (req, res) => {
+    const projectId = req.query.projectId;
+    Projects.getProjectStateById(projectId, (err, msg)=>{
+        if (err){
+            return res.json({
+                success: false,
+                msg: err
+            });
+        } else {
+            return res.json({
+                success:true,
+                msg:msg
+            })
+        }
+    })
+});
+
 router.get('/search', passport.authenticate('jwt', { session: false }), (req, res)=> {
-    const projectName = req.body.projectName;
-    const division = req.body.division;
-    const landUser = req.body.landUser;
-    const lotId = req.body.lotId;
-    const state = req.body.state;
+    const projectName = req.query.projectName;
+    const division = req.query.division;
+    const landUser = req.query.landUser;
+    const lotId = req.query.lotId;
+    const state = req.query.state;
     Projects.search(projectName, division, landUser, lotId, state, (err, success)=> {
         if (err){
             return res.json({
