@@ -171,6 +171,7 @@ exports.createUser = (req,res) => {
 
 exports.approveUser = (req,res)=> {
     personalInfo.findOneAndUpdate({uid:req.body.uid},{approvalStatus : "approved"},{new : true},(err,info)=>{
+        console.log("backend approve request for personal info recieved");
         if (err) {
             let msg = {
                 success : false,
@@ -179,30 +180,27 @@ exports.approveUser = (req,res)=> {
             res.status(500).json(msg);
           }
         else{
-            let msg = {
-                success : true,
-                msg : "success"
-            }
-            res.status(200).json(msg);
+            loginInfo.findOneAndUpdate({uid:req.body.uid},{approvalStatus : "approved"},{new : true},(err,info)=>{
+                console.log("backend approve request recieved");
+                if (err) {
+                    let msg = {
+                        success : false,
+                        msg : err
+                    }
+                    res.status(500).json(msg);
+                  }
+                else{
+                    let msg = {
+                        success : true,
+                        msg : "success"
+                    }
+                    res.status(200).json(msg);
+                }
+            });
         }
     });
 
-    loginInfo.findOneAndUpdate({uid:req.body.uid},{approvalStatus : "approved"},{new : true},(err,info)=>{
-        if (err) {
-            let msg = {
-                success : false,
-                msg : err
-            }
-            res.status(500).json(msg);
-          }
-        else{
-            let msg = {
-                success : true,
-                msg : "success"
-            }
-            res.status(200).json(msg);
-        }
-    });
+    
 };
 
 exports.rejectUser = (req,res)=> {
@@ -215,30 +213,26 @@ exports.rejectUser = (req,res)=> {
             res.status(500).json(msg);
           }
         else{
-            let msg = {
-                success : true,
-                msg : "success"
-            }
-            res.status(200).json(msg);
+            loginInfo.findOneAndUpdate({uid:req.body.uid},{approvalStatus : "rejected"},{new : true},(err,info)=>{
+                if (err) {
+                    let msg = {
+                        success : false,
+                        msg : err
+                    }
+                    res.status(500).json(msg);
+                  }
+                else{
+                    let msg = {
+                        success : true,
+                        msg : "success"
+                    }
+                    res.status(200).json(msg);
+                }
+            });
         }
     });
 
-    loginInfo.findOneAndUpdate({uid:req.body.uid},{approvalStatus : "rejected"},{new : true},(err,info)=>{
-        if (err) {
-            let msg = {
-                success : false,
-                msg : err
-            }
-            res.status(500).json(msg);
-          }
-        else{
-            let msg = {
-                success : true,
-                msg : "success"
-            }
-            res.status(200).json(msg);
-        }
-    });
+    
 };
 
 exports.deleteUser = (req, res) => {
@@ -251,28 +245,24 @@ exports.deleteUser = (req, res) => {
         res.status(404).json(msg);
       }
       else{
-        let msg = {
-            success : true,
-            msg : "success"
-        }
-        res.status(200).json(msg);
+        loginInfo.remove({ uid: req.body.uid }, (err, info) => {
+            if (err) {
+                let msg = {
+                    success : false,
+                    msg : err
+                }
+                res.status(404).json(msg);
+            }
+            else{
+                let msg = {
+                    success : true,
+                    msg : "success"
+                }
+                res.status(200).json(msg);
+            }
+          });
       }
     });
 
-    loginInfo.remove({ uid: req.body.uid }, (err, info) => {
-        if (err) {
-            let msg = {
-                success : false,
-                msg : err
-            }
-            res.status(404).json(msg);
-        }
-        else{
-            let msg = {
-                success : true,
-                msg : "success"
-            }
-            res.status(200).json(msg);
-        }
-      });
+    
   };
