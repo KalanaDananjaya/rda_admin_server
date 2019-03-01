@@ -31,6 +31,23 @@ router.post('/createProject',passport.authenticate('jwt', { session: false }), (
     }
 });
 
+router.get('/stateById', passport.authenticate('jwt', { session: false }), (req, res) => {
+    const projectId = req.query.projectId;
+    Projects.getProjectStateById(projectId, (err, msg)=>{
+        if (err){
+            return res.json({
+                success: false,
+                msg: err
+            });
+        } else {
+            return res.json({
+                success:true,
+                msg:msg
+            })
+        }
+    })
+});
+
 router.get('/search', passport.authenticate('jwt', { session: false }), (req, res)=> {
     const projectName = req.body.projectName;
     const division = req.body.division;
