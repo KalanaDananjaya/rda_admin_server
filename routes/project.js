@@ -3,6 +3,30 @@ const router = express.Router();
 const Projects = require('../controllers/ProjectController.js');
 const passport = require('passport');
 
+router.post('/createMainProject', passport.authenticate('jwt', {session:false}), (req, res)=>{
+    const projectName = req.body.projectName;
+    if (projectName !== undefined){
+        Projects.createMainProject(projectName, (err,msg) => {
+            if(err){
+                return res.json({
+                    success:false,
+                    msg:err
+                });
+            } else {
+                return res.json({
+                    success:true,
+                    msg:msg
+                });
+            }
+        })
+    } else {
+        return res.json({
+            success:false,
+            msg:'projectName is undefined'
+        });
+    }
+})
+
 router.post('/createProject',passport.authenticate('jwt', { session: false }), (req,res)=>{
     const projectName = req.body.projectName;
     const division = req.body.division;
@@ -24,6 +48,7 @@ router.post('/createProject',passport.authenticate('jwt', { session: false }), (
             }
         });
     } else {
+        console.log(req.body)
         return res.json({
             success:false,
             msg:"some parameters were empty"

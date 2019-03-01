@@ -61,7 +61,11 @@ exports.listPendingUsers = (req,res) => {
                 success : true,
                 msg : info
             }
+<<<<<<< HEAD
      
+=======
+            //console.log(msg)
+>>>>>>> af7633d9384879ce6e6a84cd48dfb53e767186b9
             res.status(200).json(msg);
         }
     });
