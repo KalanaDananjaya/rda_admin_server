@@ -61,7 +61,7 @@ exports.listPendingUsers = (req,res) => {
                 success : true,
                 msg : info
             }
-            console.log(msg)
+            //console.log(msg)
             res.status(200).json(msg);
         }
     });

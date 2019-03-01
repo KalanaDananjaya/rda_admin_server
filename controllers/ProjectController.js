@@ -37,7 +37,8 @@ exports.createProject = (projectName, division, landuser, mainProjectName,lotId,
         } else {
             project.projectId = projectId;
             project.state = "Declaration of Sec. 5";
-            const project_doc = new projectInfo(project)
+            const project_doc = new projectInfo(project);
+            console.log(project)
             project_doc.save(err => {
                 if (err){
                     return callback(err,null)
