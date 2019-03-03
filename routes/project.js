@@ -79,7 +79,8 @@ router.get('/search', passport.authenticate('jwt', { session: false }), (req, re
     const landUser = req.query.landUser;
     const lotId = req.query.lotId;
     const state = req.query.state;
-    Projects.search(projectName, division, landUser, lotId, state, (err, success)=> {
+    const mainProjectName = req.query.mainProjectName;
+    Projects.search(projectName, division, landUser, lotId, state, mainProjectName,(err, success)=> {
         if (err){
             return res.json({
                 success:false,

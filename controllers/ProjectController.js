@@ -116,8 +116,8 @@ exports.sendToNextStage = (projectId, nextStage, callback) => {
     }
 }
 
-exports.search = (projectName, division, landUser, lotId, state, callback) => {
-    serachObject = createSearchObject(projectName, division, landUser, lotId, state)
+exports.search = (projectName, division, landUser, lotId, state, mainProjectName,callback) => {
+    serachObject = createSearchObject(projectName, division, landUser, lotId, state, mainProjectName)
     projectInfo.find(serachObject, (err, docs)=>{
         if (err){
             return callback(err, null);
@@ -127,7 +127,7 @@ exports.search = (projectName, division, landUser, lotId, state, callback) => {
     })
 }
 
-function createSearchObject(projectName, division, landUser, lotId, state){
+function createSearchObject(projectName, division, landUser, lotId, state, mainProjectName){
     serachObject = {}
     if (projectName !== undefined){
         serachObject.projectName = {$regex:`${projectName}.*`,$options: 'i'}
@@ -143,6 +143,9 @@ function createSearchObject(projectName, division, landUser, lotId, state){
     }
     if (state !== undefined){
         serachObject.state = {$regex:`${state}.*`, $options: 'i'}
+    }
+    if (mainProjectName !== undefined){
+        serachObject.mainProjectName = {$regex:`${mainProjectName}.*`,$options: 'i'}
     }
     return serachObject
 }
