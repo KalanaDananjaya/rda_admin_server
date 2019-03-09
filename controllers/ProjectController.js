@@ -1,7 +1,7 @@
 const projectInfo = require('../models/project_info');
 const mainProjects = require('../models/main_project_info');
 const nextStage = require('../models/next_stage');
-
+const stageTransitions = require('../models/stage_transitions');
 const uuid = require('uuid/v1');
 
 exports.getProjectStateById = (projectId, callback) => {
@@ -89,6 +89,16 @@ exports.createProject = (projectName, division, landuser, mainProjectName,lotId,
     
 }
 
+exports.findNextStage = (projectId, callback) => {
+    getStateTransitions(projectId, (err, success)=> {
+        if(err){
+            return callback(err, null);
+        } else {
+            return callback(null, success);
+        }
+    })
+}
+
 exports.sendToNextStage = (projectId, nextStage, callback) => {
     if(nextStage == undefined){
         getNextStage(projectId, (err, success)=> {
@@ -154,6 +164,33 @@ function getNextStage(projectId,callback) {
     projectInfo.find({projectId:projectId},(err, docs)=>{
         if(err) {
             return callback(err,null)
+        } else {
+            doc = docs[0]
+            currentState = doc['state']
+            stageTransitions.find({current:currentState}, (err,docs) => {
+                if (err){
+                    return callback(err, null)
+                } else {
+                    if (docs.length === 0) {
+                        return callback("next stage is unknown",null)
+                    } else {
+                        doc = docs[0]
+                        next = doc.next;
+                        return callback(null, next)
+                    }
+                }
+            });
+        }
+    });
+}
+
+function getStateTransitions(projectId,callback) {
+    projectInfo.find({projectId:projectId},(err, docs)=>{
+        if(err) {
+            return callback(err,null);
+        } 
+        if (docs.length === 0){
+            return callback('projectId is invalid', null);
         } else {
             doc = docs[0]
             currentState = doc['state']
