@@ -25,6 +25,30 @@ router.post('/createMainProject', passport.authenticate('jwt', {session:false}),
             msg:'projectName is undefined'
         });
     }
+});
+
+router.get('/getProjectInfo', passport.authenticate('jwt', { session: false}), (req, res) => {
+    const projectId = req.query.projectId;
+    if (projectId !== undefined){
+        Projects.getProjectInfoById(projectId, (err, success) => {
+            if (err){
+                return res.json({
+                    success: false,
+                    msg: err
+                });
+            } else {
+                return res.json({
+                    success: true,
+                    msg: success
+                })
+            }
+        })
+    } else {
+        return res.json({
+            success: false,
+            msg: 'projectId is undefined'
+        })
+    }
 })
 
 router.post('/createProject',passport.authenticate('jwt', { session: false }), (req,res)=>{

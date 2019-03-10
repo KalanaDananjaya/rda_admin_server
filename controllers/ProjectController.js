@@ -20,6 +20,21 @@ exports.getProjectStateById = (projectId, callback) => {
     })
 }
 
+exports.getProjectInfoById = (projectId, callback) => {
+    projectInfo.find({projectId:projectId}, (err, docs) => {
+        if (err) {
+            return callback(err, null);
+        } else {
+            const doc = docs[0];
+            if (doc){
+                return callback(null, doc);
+            } else {
+                return callback('invalid projectId',null);
+            }
+        }
+    })
+}
+
 exports.createMainProject = (projectName, callback) => {
     const projectId = uuid();
     mainProjects.findOne({projectName:projectName}, (err, doc)=>{
