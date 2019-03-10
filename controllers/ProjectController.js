@@ -2,6 +2,7 @@ const projectInfo = require('../models/project_info');
 const mainProjects = require('../models/main_project_info');
 const nextStage = require('../models/next_stage');
 const stageTransitions = require('../models/stage_transitions');
+const stageInfo = require('../models/stage_info');
 const uuid = require('uuid/v1');
 
 exports.getProjectStateById = (projectId, callback) => {
@@ -158,6 +159,20 @@ function createSearchObject(projectName, division, landUser, lotId, state, mainP
         serachObject.mainProjectName = {$regex:`${mainProjectName}.*`,$options: 'i'}
     }
     return serachObject
+}
+
+exports.getStageInfo = (stage, callback) => {
+    stageInfo.findOne({stage: stage}, (err, doc) => {
+        if (err) {
+            return callback(err, null)
+        } else {
+            if(doc) {
+                return callback(null, doc);
+            } else {
+                return callback('invalid stage', null)
+            }
+        }
+    })
 }
 
 function getNextStage(projectId,callback) {
