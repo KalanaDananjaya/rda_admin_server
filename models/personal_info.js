@@ -24,7 +24,7 @@ const personalInfo = new Schema({
     type : Array,
     items : {
         type : String,
-        enum : ["dop","ds"]  //dept of printing,divisional secretary
+        enum : ["Ministry of Land","D/S","DOP","SS","DS","VD","Ministry of Highways"]  //dept of printing,divisional secretary
     }
   },
   approvalStatus  :{

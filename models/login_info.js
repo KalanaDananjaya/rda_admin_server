@@ -30,6 +30,13 @@ const loginInfo = new Schema({
         enum : ["admin","user"] 
     }
   },
+  category : {
+    type : Array,
+    items : {
+        type : String,
+        enum : ["Ministry of Land","D/S","DOP","SS","DS","VD","Ministry of Highways"]  //dept of printing,divisional secretary
+    }
+  },
   reset_password_token: {
     type: String,
     default : null
