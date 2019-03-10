@@ -73,6 +73,54 @@ router.get('/stateById', passport.authenticate('jwt', { session: false }), (req,
     })
 });
 
+router.get('/stageInfo', passport.authenticate('jwt', { session: false }), (req, res) => {
+    const stage = req.query.stage;
+    if (stage !== undefined){
+        Projects.getStageInfo(stage, (err, msg)=>{
+            if (err){
+                return res.json({
+                    success: false,
+                    msg: err
+                });
+            } else {
+                return res.json({
+                    success:true,
+                    msg:msg
+                })
+            }
+        });
+    } else {
+        return res.json({
+            success: false,
+            msg: 'stage is undefined'
+        });
+    }    
+});
+
+router.get('/nextStageById', passport.authenticate('jwt', { session: false }), (req, res) => {
+    const projectId = req.query.projectId;
+    if(projectId !== undefined){
+        Projects.findNextStage(projectId, (err, msg) => {
+            if (err) {
+                return res.json({
+                    success: false,
+                    msg: err
+                });
+            } else {
+                return res.json({
+                    success: true,
+                    msg:msg
+                });
+            }
+        });
+    } else {
+        return res.json({
+            success: false,
+            msg: 'projectId is undefined'
+        });
+    }
+});
+
 router.get('/search', passport.authenticate('jwt', { session: false }), (req, res)=> {
     const projectName = req.query.projectName;
     const division = req.query.division;
