@@ -97,6 +97,18 @@ router.get('/stateById', passport.authenticate('jwt', { session: false }), (req,
     })
 });
 
+router.get('/stageTransitions', passport.authenticate('jwt', { session: false }), (res, req) => {
+    const stage = req.query.stage;
+    if(stage !== undefined){
+
+    } else {
+        return res.json({
+            success:false,
+            msg:'stage is undefined'
+        })
+    }
+})
+
 router.get('/stageInfo', passport.authenticate('jwt', { session: false }), (req, res) => {
     const stage = req.query.stage;
     if (stage !== undefined){
@@ -124,7 +136,7 @@ router.get('/stageInfo', passport.authenticate('jwt', { session: false }), (req,
 router.get('/nextStageById', passport.authenticate('jwt', { session: false }), (req, res) => {
     const projectId = req.query.projectId;
     if(projectId !== undefined){
-        Projects.findNextStage(projectId, (err, msg) => {
+        Projects.getNextStage(projectId, (err, msg) => {
             if (err) {
                 return res.json({
                     success: false,

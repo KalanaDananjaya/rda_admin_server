@@ -77,7 +77,7 @@ router.get('/fileInfo', passport.authenticate('jwt', { session: false }), (req,r
     }
 });
 
-router.get('/file',passport.authenticate('jwt', { session: false }), (req,res) => {
+router.get('/file', (req,res) => {
     const fileId = req.query.fileId;
     if (fileId === undefined){
         return res.json({
