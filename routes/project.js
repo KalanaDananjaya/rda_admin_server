@@ -136,7 +136,7 @@ router.get('/stageInfo', passport.authenticate('jwt', { session: false }), (req,
 router.get('/nextStageById', passport.authenticate('jwt', { session: false }), (req, res) => {
     const projectId = req.query.projectId;
     if(projectId !== undefined){
-        Projects.getNextStage(projectId, (err, msg) => {
+        Projects.findNextStage(projectId, (err, msg) => {
             if (err) {
                 return res.json({
                     success: false,

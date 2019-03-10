@@ -106,7 +106,7 @@ exports.createProject = (projectName, division, landuser, mainProjectName,lotId,
 }
 
 exports.findNextStage = (projectId, callback) => {
-    getStateTransitions(projectId, (err, success)=> {
+    getNextStage(projectId, (err, success)=> {
         if(err){
             return callback(err, null);
         } else {
