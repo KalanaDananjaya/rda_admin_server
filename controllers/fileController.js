@@ -54,7 +54,7 @@ exports.uploadFile = (projectId, file, uid,callback) => {
                         }
                     })
                 }, error => {
-                    return callback(err, null);
+                    return callback(error, null);
                 });
             }
         }
