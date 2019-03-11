@@ -128,7 +128,7 @@ permissions = {
     "Print Gazette Under Sec. 7": 'DOP',
     "Conducting Sec. a Inquiries": 'DS',
     "10(1)(b) Decision": 'DS',
-    "Court Decision": 'District Court',
+    "Court Decision": 'DS',
     "Send to valuation": 'DS',
     "Issue valuation": 'VD',
     "Issue Sec.17 notice": 'DS',

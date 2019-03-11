@@ -105,6 +105,7 @@ exports.forgot_password = function(req, res) {
   }
     exports.reset_password = (req, res)=> {
       console.log(req);
+      
       if (req.body.newPassword === req.body.verifyPassword) {
         var newPwHash =bcrypt.hash(req.body.newPassword, 10);
         
