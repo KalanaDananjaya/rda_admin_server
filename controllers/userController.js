@@ -125,7 +125,7 @@ exports.createUser = (req,res) => {
                 success : false,
                 msg : err
             }
-            res.status(500).json(msg);
+            res.status(200).json(msg);
         }
         else{
             //save to login details
@@ -139,6 +139,7 @@ exports.createUser = (req,res) => {
                     uid : generatedUid,
                     password :hash,
                     approvalStatus : "pending",
+                    category : req.body.category,
                     user_type : req.body.user_type
                 });
         
@@ -148,7 +149,7 @@ exports.createUser = (req,res) => {
                             success : false,
                             msg : err
                         }
-                        res.status(500).json(msg);
+                        res.status(200).json(msg);
                     }
                     else{
                         let msg = {
