@@ -6,7 +6,7 @@ const passport = require('passport');
 router.post('/uploadFile', passport.authenticate('jwt', { session: false }),(req,res) => {
     const projectId = req.body.projectId;
     const file = req.files.file; // name of the field for file upload is file
-    const uid = req.body.uid;
+    const uid = req.headers.uid;
     if (Object.keys(req.files).length === 0 || projectId === undefined) {
         return res.json({
             sucess:false,
@@ -77,7 +77,7 @@ router.get('/fileInfo', passport.authenticate('jwt', { session: false }), (req,r
     }
 });
 
-router.get('/file',passport.authenticate('jwt', { session: false }), (req,res) => {
+router.get('/file', (req,res) => {
     const fileId = req.query.fileId;
     if (fileId === undefined){
         return res.json({

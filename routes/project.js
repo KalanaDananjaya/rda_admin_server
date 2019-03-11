@@ -25,6 +25,30 @@ router.post('/createMainProject', passport.authenticate('jwt', {session:false}),
             msg:'projectName is undefined'
         });
     }
+});
+
+router.get('/getProjectInfo', passport.authenticate('jwt', { session: false}), (req, res) => {
+    const projectId = req.query.projectId;
+    if (projectId !== undefined){
+        Projects.getProjectInfoById(projectId, (err, success) => {
+            if (err){
+                return res.json({
+                    success: false,
+                    msg: err
+                });
+            } else {
+                return res.json({
+                    success: true,
+                    msg: success
+                })
+            }
+        })
+    } else {
+        return res.json({
+            success: false,
+            msg: 'projectId is undefined'
+        })
+    }
 })
 
 router.post('/createProject',passport.authenticate('jwt', { session: false }), (req,res)=>{
@@ -72,6 +96,18 @@ router.get('/stateById', passport.authenticate('jwt', { session: false }), (req,
         }
     })
 });
+
+router.get('/stageTransitions', passport.authenticate('jwt', { session: false }), (res, req) => {
+    const stage = req.query.stage;
+    if(stage !== undefined){
+
+    } else {
+        return res.json({
+            success:false,
+            msg:'stage is undefined'
+        })
+    }
+})
 
 router.get('/stageInfo', passport.authenticate('jwt', { session: false }), (req, res) => {
     const stage = req.query.stage;
