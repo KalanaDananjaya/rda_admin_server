@@ -181,26 +181,19 @@ router.get('/search', passport.authenticate('jwt', { session: false }), (req, re
 
 router.get('/searchMainProject', passport.authenticate('jwt', {session:false}), (req,res)=>{
     const mainProjectName = req.query.mainProjectName;
-    if (mainProjectName !== undefined){
-        Projects.searchMainProject(mainProjectName, (err, success) => {
-            if (err) {
-                return res.json({
-                    success: false,
-                    msg: err
-                });
-            } else {
-                return res.json({
-                    success: true,
-                    msg: success
-                });
-            }
-        })
-    } else {
-        return res.json({
-            success: false,
-            msg: 'mainProjectName is undefined'
-        })
-    }
+    Projects.searchMainProject(mainProjectName, (err, success) => {
+        if (err) {
+            return res.json({
+                success: false,
+                msg: err
+            });
+        } else {
+            return res.json({
+                success: true,
+                msg: success
+            });
+        }
+    })
 })
 
 router.post('/sendToNextStage', passport.authenticate('jwt', { session: false }), (req,res)=> {
