@@ -29,7 +29,8 @@ These endpoints are related to manipulation of project data
 
 * [create project](documentation/project/createProject.md) : `POST /projects/createProject`
 * [move to next stage](documentation/project/sendToNextStage.md) : `POST /projects/sendToNextStage`
-* [search](documentation/project/search.md) : `POST /projects/search`
+* [search](documentation/project/search.md) : `GET /projects/search`
+* [search main Project](documentation/project/searchMainProject.md) : `GET /projects/searchMainProject`
 
 ### File
 These endpoints are related to manipulation of project files
