@@ -1,4 +1,4 @@
-# Create Project
+# Search Project
 
 Use to search for a project. For each metadata provided will perform a case-insensitive substring matching(!important: don't strip any characters). If no parameter is given will return all the projects
 

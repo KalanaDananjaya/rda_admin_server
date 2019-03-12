@@ -150,6 +150,19 @@ exports.search = (projectName, division, landUser, lotId, state, mainProjectName
         } else {
             return callback(null, docs);
         }
+    });
+}
+
+exports.searchMainProject = (mainProjectName, callback) => {
+    searchObject = {
+        projectName : {$regex:`${mainProjectName}.*`, $options: 'i'}
+    }
+    mainProjects.find(searchObject, (err, docs) => {
+        if (err){
+            return callback(err, null);
+        } else {
+            return callback(null, docs);
+        }
     })
 }
 
