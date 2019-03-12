@@ -154,16 +154,27 @@ exports.search = (projectName, division, landUser, lotId, state, mainProjectName
 }
 
 exports.searchMainProject = (mainProjectName, callback) => {
-    searchObject = {
-        projectName : {$regex:`${mainProjectName}.*`, $options: 'i'}
-    }
-    mainProjects.find(searchObject, (err, docs) => {
-        if (err){
-            return callback(err, null);
-        } else {
-            return callback(null, docs);
+    if (mainProjectName !== undefined){
+        searchObject = {
+            projectName : {$regex:`${mainProjectName}.*`, $options: 'i'}
         }
-    })
+        mainProjects.find(searchObject, (err, docs) => {
+            if (err){
+                return callback(err, null);
+            } else {
+                return callback(null, docs);
+            }
+        })
+    } else {
+        mainProjects.find((err, docs) => {
+            if (err){
+                return callback(err, null);
+            } else {
+                return callback(null, docs);
+            }
+        })
+    }
+    
 }
 
 function createSearchObject(projectName, division, landUser, lotId, state, mainProjectName){

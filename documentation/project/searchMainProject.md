@@ -10,8 +10,7 @@ Use to search for a  main project. Will perform a case insensitive substring mat
 
 **Permissions required** : None
 
-**Parameters** : mainProjectName
-
+**Parameters** : [mainProjectName]
 ## Success Response
 
 **Code** : `200 OK`
