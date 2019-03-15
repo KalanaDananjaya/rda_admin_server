@@ -94,7 +94,8 @@ temp = {
     'Take decision': 'Send to valuation',
     'Send to valuation':'Issue valuation Y-N',
     'Issue valuation Y-N': 'Issue Sec.17',
-    'Issue Sec.17': "Take action under sec. 33"
+    'Issue Sec.17': "Take action under sec. 33",
+    'Registered under sec. 44': 'Complete'
 }
 for each in temp:
     d = {
