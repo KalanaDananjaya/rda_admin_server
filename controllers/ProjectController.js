@@ -3,6 +3,7 @@ const mainProjects = require('../models/main_project_info');
 const nextStage = require('../models/next_stage');
 const stageTransitions = require('../models/stage_transitions');
 const stageInfo = require('../models/stage_info');
+const paymentInfo = require('../models/payment_info');
 const uuid = require('uuid/v1');
 
 exports.getProjectStateById = (projectId, callback) => {
@@ -113,6 +114,25 @@ exports.findNextStage = (projectId, callback) => {
             return callback(null, success);
         }
     })
+}
+
+exports.enterPaymentInfo = (projectId, amount, callback) => {
+    if(amount <= 0){
+        return callback('Payment amount is less than or equal to 0', null);
+    } else {
+        data = {
+            projectId: projectId,
+            payment: amount
+        }
+        const payment = new paymentInfo(data);
+        payment.save(err => {
+            if (err){
+                return callback(err, null);
+            } else {
+                return callback(null, 'payment info recorded');
+            }
+        })
+    }
 }
 
 exports.sendToNextStage = (projectId, nextStage, callback) => {
