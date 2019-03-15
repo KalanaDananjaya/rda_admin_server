@@ -16,7 +16,7 @@ if 'stage_transitions' in collections:
 
 if 'stage_info' in collections:
     print('stage_info collection already existing dropping collection')
-    db['stage_info'].drop
+    db['stage_info'].drop()
 
 collection = db["next_stage"]
 stage_transitions = db['stage_transitions']
@@ -87,7 +87,15 @@ temp = {
     'Take super larc decision': [
         'Paid',
         'Take action under sec.33'
-    ]
+    ],
+    'Send to': 'Do Collections',
+    'Do Collections': '10(1)(a) Dicision',
+    'Sec. 15 notice': 'Take decision',
+    'Take decision': 'Send to valuation',
+    'Send to valuation':'Issue valuation Y-N',
+    'Issue valuation Y-N': 'Issue Sec.17',
+    'Issue Sec.17': "Take action under sec. 33",
+    'Registered under sec. 44': 'Complete'
 }
 for each in temp:
     d = {
@@ -101,7 +109,12 @@ stage_transitions.insert_many(_buffer)
 true_false_stages = [
     "Prepare Gazette Under Sec. 5",
     "Prepare Gazette Under Sec. 7",
-    'Conducting Sec. a Inquiries'
+    'Conducting Sec. a Inquiries',
+    'Court Decision',
+    'Send to valuation',
+    '10(1)(a) Decision',
+    'Do Collections',
+    'Take action under sec.33'
 ]
 
 pdf_stages = [
@@ -139,8 +152,13 @@ permissions = {
     '10(1)(a) Decision': 'DS',
     'Sec. 15 notice': 'DS',
     'Do Collections': 'DS',
-    'Take super larc decision': 'Ministry of Highways'
+    'Take super larc decision': 'Ministry of Highways',
+    'Paid': 'DS'
 }
+
+typing = [
+    'Paid'
+]
 
 stage_info_buffer = []
 for each in permissions:
@@ -149,6 +167,8 @@ for each in permissions:
         option = 'pdf'
     elif each in true_false_stages:
         option = 'boolean'
+    elif each in typing:
+        option = 'typing'
     d = {
         'stage': each,
         'permission': permissions[each],
@@ -156,4 +176,7 @@ for each in permissions:
     }
     stage_info_buffer.append(d)
 
-stage_info.insert_many(stage_info_buffer)
+try:
+    stage_info.insert_many(stage_info_buffer)
+except pymongo.errors.BulkWriteError as ex:
+    print(ex.details)

@@ -49,7 +49,32 @@ router.get('/getProjectInfo', passport.authenticate('jwt', { session: false}), (
             msg: 'projectId is undefined'
         })
     }
-})
+});
+
+router.post('/enterPayemtInfo', passport.authenticate('jwt', { session: false}), (req, res) => {
+    const projectId = req.body.projectId;
+    const amount = req.body.amount
+    if (projectId !== undefined && amount !== undefined){
+        Projects.enterPaymentInfo(projectId, amount,(err, success) => {
+            if (err){
+                return res.json({
+                    success: false,
+                    msg: err
+                });
+            } else {
+                return res.json({
+                    success: true,
+                    msg: success
+                })
+            }
+        })
+    } else {
+        return res.json({
+            success: false,
+            msg: 'projectId / amount is undefined'
+        })
+    }
+});
 
 router.post('/createProject',passport.authenticate('jwt', { session: false }), (req,res)=>{
     const projectName = req.body.projectName;
