@@ -63,14 +63,15 @@ exports.createMainProject = (projectName, callback) => {
 
 //todo: save the created by UID
 
-exports.createProject = (projectName, division, landuser, mainProjectName,lotId,callback) => {
+exports.createProject = (projectName, division, landuser, mainProjectName,lotId, preliminaryPlan,callback) => {
     const projectId = uuid();
     let project = {
         projectName:projectName,
         division:division,
         landUser:landuser,
         mainProjectName: mainProjectName,
-        lotId:lotId        
+        lotId:lotId,
+        preliminaryPlan: preliminaryPlan      
     };
     // check if main Project exists
     mainProjects.findOne({projectName:mainProjectName}, (err,doc)=>{

@@ -30,6 +30,10 @@ const projectInfo = new Schema({
     state: {
         type: String,
         required: true
+    },
+    preliminaryPlan: {
+        type: String,
+        required: true
     }
 })
 
