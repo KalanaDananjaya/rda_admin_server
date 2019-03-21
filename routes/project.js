@@ -82,8 +82,9 @@ router.post('/createProject',passport.authenticate('jwt', { session: false }), (
     const landUser = req.body.landUser;
     const lotId = req.body.lotNo;
     const mainProjectName = req.body.mainProjectName;
-    if (projectName != undefined && division != undefined && landUser != undefined && lotId != undefined && mainProjectName != undefined){
-        Projects.createProject(projectName,division,landUser, mainProjectName, lotId,(err, success)=>{
+    const preliminaryPlan = req.body.preliminaryPlan;
+    if (projectName != undefined && division != undefined && landUser != undefined && lotId != undefined && mainProjectName != undefined && preliminaryPlan != undefined){
+        Projects.createProject(projectName,division,landUser, mainProjectName, lotId, preliminaryPlan,(err, success)=>{
             if (err){
                 return res.json({
                     success:false,
